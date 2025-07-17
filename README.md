@@ -35,7 +35,7 @@ You can also preload about a thousand **hotstrings** to the end of your config n
 
 To define a **hotstring**, open the plugin's claimed config note and, on a new line, enter text like this: 
 
-```json
+```
 "left" : "←"
 ```
 
@@ -46,7 +46,7 @@ And this will define a **hotstring** which, when activated, changes the text `le
 * Use two colons (::) for case-sensitive **hotstrings**
 
 Example:
-```json
+```
 "Gamma" :: "Γ"
 "theta" : "θ"
 ```
@@ -57,7 +57,7 @@ In this case:
 
 You may optionally include Python- or JavaScript-style inline comments in your definitions, using `#` or `//`. 
 
-```json
+```
 ":)" : "🙂" # Like this! 
 ":(" : "🙁" // Or this! 
 ```
@@ -102,7 +102,7 @@ Note: Due to a [bug](https://discourse.joplinapp.org/t/bug-inconsistent-modifier
 
 As a convenience, you can also set the **start token** and **end token** directly from the config note, rather than from the plugin settings page. To do so, use the following format: 
 
-```json
+```
 "startToken" := "" # Empty
 "endToken" := "/"
 ```
@@ -133,12 +133,15 @@ There's no requirement that the config file only contain definitions, or that it
 Note that, although all screenshots are taken from the hotstrings config note, hotstrings work in *any* note. 
 
 A sample of the (optional) 1000+ built-in hotstrings
+
 ![](screenshots/sample.png)
 
 A demo of two case-insensitive hotstrings, a hotkey, and two case-sensitive hotstrings
+
 ![](screenshots/demo.gif)
 
 A typing test - can the plugin keep up with full typing speed?
+
 ![](screenshots/typing_test.gif)
 
 ## Settings
