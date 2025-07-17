@@ -79,7 +79,7 @@ For example, you may want to define them both as `::`, or both as `/`, in which 
 To define a **hotkey**, use three colons (:::) instead of one or two. On the left side, write the key combination desired, using `+` between each key
 
 Examples:
-```json
+```
 "Ctrl + H" ::: "\n* * *\n" # Horizontal rule
 "control + Alt + d" ::: "<details>\n\t<summary>Title</summary>\n\tBody\n</details>" # Collapsible <details> block
 "shift+K" ::: "oala" // Any time you write K, it writes Koala ¯\_(ツ)_/¯
