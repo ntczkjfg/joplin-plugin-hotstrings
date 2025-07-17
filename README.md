@@ -7,13 +7,13 @@ This Joplin plugin allows you to create user-defined **hotstrings** and **hotkey
 ### Installation
 
 - Open Joplin and navigate to `Preferences > Plugins`
-- Search for `Hotstrings` and click install
+- Search for `Hotstrings & Hotkeys` and click install
 - Restart Joplin
 
 ### Uninstall
 
 - Open Joplin and navigate to `Tools > Options > Plugins`
-- Find the `Hotstrings` plugin
+- Find the `Hotstrings & Hotkeys` plugin
 - Press `Delete` to remove the plugin, or click the toggle to disable it
 - Restart Joplin
 
