@@ -1,0 +1,257 @@
+/* Remove border from cm-inlineCode class, minor other adjustments */
+.hs-match, .hs-MaTcH, .hk-match, .hs-repeat, .hs-reject, .hs-token,
+.hs-match .cm-inlineCode, .hs-MaTcH .cm-inlineCode, .hk-match .cm-inlineCode,
+.hs-repeat .cm-inlineCode, .hs-reject .cm-inlineCode, .hs-token .cm-inlineCode {
+  border: none !important;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-weight: 500;
+}
+/* Border around left and right matches */
+.hs-left, .hs-right {
+  border-radius: 4px;
+}
+/* If the user used backticks as quotes, remove the .cm-inlineCode border */
+.hs-left .cm-inlineCode, .hs-right .cm-inlineCode {
+  border: none;
+}
+/* Muted look for the comments */
+.hs-comment {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+
+/* ===DARK THEME=== */
+
+.hs-dark .hs-comment { /* Comments */
+  color: #889096;
+}
+.hs-match.hs-dark::selection,
+.hs-MaTcH.hs-dark::selection,
+.hk-match.hs-dark::selection,
+.hs-repeat.hs-dark::selection { /* Text selection color */
+  color: #fff;
+}
+.hs-dark .hs-left, .hs-dark .hs-right { /* Left and right border */
+  border: 1px solid black;
+}
+
+/* Case-insensitive hotstrings, green colors */
+.hs-match.hs-dark { /* Line bg-color, text color */
+  background-color: #273b2e;
+  color: #a7ffb0;
+}
+.hs-match.hs-dark .hs-left,
+.hs-match.hs-dark .hs-right { /* Left and right bg-color */
+  background-color: #1f3025;
+}
+.hs-match.hs-dark:hover { /* Line bg-color on hover */
+  background-color: #335c43;
+}
+.hs-match.hs-dark:hover .hs-left,
+.hs-match.hs-dark:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #273b2e;
+}
+
+/* Case-sensitive hotstrings, blue colors */
+.hs-MaTcH.hs-dark { /* Line bg-color, text color */
+  background-color: #273b4e;
+  color: #a7c7ff;
+}
+.hs-MaTcH.hs-dark .hs-left,
+.hs-MaTcH.hs-dark .hs-right { /* Left and right bg-color */
+  background-color: #1f2f3f;
+}
+.hs-MaTcH.hs-dark:hover { /* Line bg-color on hover */
+  background-color: #335a74;
+}
+.hs-MaTcH.hs-dark:hover .hs-left,
+.hs-MaTcH.hs-dark:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #273b4e;
+}
+
+/* Hotkeys, purple colors */
+.hk-match.hs-dark { /* Line bg-color, text color */
+  background-color: #3a2b57;
+  color: #e1a9ff;
+}
+.hk-match.hs-dark .hs-left,
+.hk-match.hs-dark .hs-right { /* Left and right bg-color */
+  background-color: #3a2b4a;
+}
+.hk-match.hs-dark:hover { /* Line bg-color on hover */
+  background-color: #5a3e73;
+}
+.hk-match.hs-dark:hover .hs-left,
+.hk-match.hs-dark:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #3a2b57;
+}
+
+/* Repeated keys, yellow colors */
+.hs-repeat.hs-dark { /* Line bg-color, text color */
+  background-color: #3b2e27;
+  color: #ffeb7a;
+}
+.hs-repeat.hs-dark .hs-left,
+.hs-repeat.hs-dark .hs-right { /* Left and right bg-color */
+  background-color: #3f2f1f;
+}
+.hs-repeat.hs-dark:hover { /* Line bg-color on hover */
+  background-color: #746633;
+}
+.hs-repeat.hs-dark:hover .hs-left,
+.hs-repeat.hs-dark:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #3b2e27;
+}
+
+/* Rejected hotkey, red colors */
+.hs-reject.hs-dark { /* Line bg-color, text color */
+  background-color: #3b2727;
+  color: #ff9a9a;
+}
+.hs-reject.hs-dark .hs-left,
+.hs-reject.hs-dark .hs-right { /* Left and right bg-color */
+  background-color: #2f1f1f;
+}
+.hs-reject.hs-dark:hover { /* Line bg-color on hover */
+  background-color: #733b3b;
+}
+.hs-reject.hs-dark:hover .hs-left,
+.hs-reject.hs-dark:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #3b2727;
+}
+
+/* Token definition, teal colors */
+.hs-token.hs-dark { /* Line bg-color, text color */
+  background-color: #273b3b;
+  color: #a7fffb;
+}
+.hs-token.hs-dark .hs-left,
+.hs-token.hs-dark .hs-right { /* Left and right bg-color */
+  background-color: #1f302f;
+}
+.hs-token.hs-dark:hover { /* Line bg-color on hover */
+  background-color: #335c5c;
+}
+.hs-token.hs-dark:hover .hs-left,
+.hs-token.hs-dark:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #273b3b;
+}
+
+/* ===LIGHT THEME=== */
+
+.hs-light .hs-comment { /* Comments */
+  color: #6c757d;
+}
+.hs-match.hs-light::selection,
+.hs-MaTcH.hs-light::selection,
+.hk-match.hs-light::selection,
+.hs-repeat.hs-light::selection { /* Text selection color */
+  color: #fff;
+}
+.hs-dark .hs-left, .hs-dark .hs-right { /* Left and right border */
+  border: 1px solid grey;
+}
+
+/* Case-insensitive hotstrings, green colors */
+.hs-match.hs-light { /* Line bg-color, text color */
+  background-color: #e6f7e2;
+  color: #4b8d6b;
+}
+.hs-match.hs-light .hs-left,
+.hs-match.hs-light .hs-right { /* Left and right bg-color */
+  background-color: #c8e0d3;
+}
+.hs-match.hs-light:hover { /* Line bg-color on hover */
+  background-color: #b3d9b2;
+}
+.hs-match.hs-light:hover .hs-left,
+.hs-match.hs-light:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #e6f7e2;
+}
+
+/* Case-sensitive hotstrings, blue colors */
+.hs-MaTcH.hs-light { /* Line bg-color, text color */
+  background-color: #d9e7f4;
+  color: #4a7da7;
+}
+.hs-MaTcH.hs-light .hs-left,
+.hs-MaTcH.hs-light .hs-right { /* Left and right bg-color */
+  background-color: #b3c9d9;
+}
+.hs-MaTcH.hs-light:hover { /* Line bg-color on hover */
+  background-color: #a1bdd2;
+}
+.hs-MaTcH.hs-light:hover .hs-left,
+.hs-MaTcH.hs-light:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #d9e7f4;
+}
+
+/* Hotkeys, purple colors */
+.hk-match.hs-light { /* Line bg-color, text color */
+  background-color: #f3e6ff;
+  color: #4b3c73;
+}
+.hk-match.hs-light .hs-left,
+.hk-match.hs-light .hs-right { /* Left and right bg-color */
+  background-color: #e4c8f0;
+}
+.hk-match.hs-light:hover { /* Line bg-color on hover */
+  background-color: #d6a8e0;
+}
+.hk-match.hs-light:hover .hs-left,
+.hk-match.hs-light:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #f3e6ff;
+}
+
+/* Repeated keys, yellow colors */
+.hs-repeat.hs-light { /* Line bg-color, text color */
+  background-color: #fdf0c5;
+  color: #7f5a2a;
+}
+.hs-repeat.hs-light .hs-left,
+.hs-repeat.hs-light .hs-right { /* Left and right bg-color */
+  background-color: #e1c79a;
+}
+.hs-repeat.hs-light:hover { /* Line bg-color on hover */
+  background-color: #d0b56b;
+}
+.hs-repeat.hs-light:hover .hs-left,
+.hs-repeat.hs-light:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #fdf0c5;
+}
+
+/* Rejected hotkey, red colors */
+.hs-reject.hs-light { /* Line bg-color, text color */
+  background-color: #fce5e5;
+  color: #8c3b3b;
+}
+.hs-reject.hs-light .hs-left,
+.hs-reject.hs-light .hs-right { /* Left and right bg-color */
+  background-color: #f3cccc;
+}
+.hs-reject.hs-light:hover { /* Line bg-color on hover */
+  background-color: #e4a3a3;
+}
+.hs-reject.hs-light:hover .hs-left,
+.hs-reject.hs-light:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #fce5e5;
+}
+
+/* Token definition, teal colors */
+.hs-token.hs-light { /* Line bg-color, text color */
+  background-color: #e0f7f6;
+  color: #2e6f6c;
+}
+.hs-token.hs-light .hs-left,
+.hs-token.hs-light .hs-right { /* Left and right bg-color */
+  background-color: #c2e3e1;
+}
+.hs-token.hs-light:hover { /* Line bg-color on hover */
+  background-color: #a1cfcd;
+}
+.hs-token.hs-light:hover .hs-left,
+.hs-token.hs-light:hover .hs-right { /* Left and right bg-color on hover */
+  background-color: #e0f7f6;
+}
