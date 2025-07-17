@@ -35,7 +35,7 @@ You can also preload about a thousand **hotstrings** to the end of your config n
 
 To define a **hotstring**, open the plugin's claimed config note and, on a new line, enter text like this: 
 
-```json
+```
 "left" : "←"
 ```
 
@@ -46,7 +46,7 @@ And this will define a **hotstring** which, when activated, changes the text `le
 * Use two colons (::) for case-sensitive **hotstrings**
 
 Example:
-```json
+```
 "Gamma" :: "Γ"
 "theta" : "θ"
 ```
@@ -57,7 +57,7 @@ In this case:
 
 You may optionally include Python- or JavaScript-style inline comments in your definitions, using `#` or `//`. 
 
-```json
+```
 ":)" : "🙂" # Like this! 
 ":(" : "🙁" // Or this! 
 ```
@@ -79,7 +79,7 @@ For example, you may want to define them both as `::`, or both as `/`, in which 
 To define a **hotkey**, use three colons (:::) instead of one or two. On the left side, write the key combination desired, using `+` between each key
 
 Examples:
-```json
+```
 "Ctrl + H" ::: "\n* * *\n" # Horizontal rule
 "control + Alt + d" ::: "<details>\n\t<summary>Title</summary>\n\tBody\n</details>" # Collapsible <details> block
 "shift+K" ::: "oala" // Any time you write K, it writes Koala ¯\_(ツ)_/¯
@@ -102,7 +102,7 @@ Note: Due to a [bug](https://discourse.joplinapp.org/t/bug-inconsistent-modifier
 
 As a convenience, you can also set the **start token** and **end token** directly from the config note, rather than from the plugin settings page. To do so, use the following format: 
 
-```json
+```
 "startToken" := "" # Empty
 "endToken" := "/"
 ```
