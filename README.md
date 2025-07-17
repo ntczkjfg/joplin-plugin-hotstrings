@@ -1,4 +1,4 @@
-# Joplin Plugin - Hotstrings
+# Joplin Plugin - Hotstrings & Hotkeys
 
 This Joplin plugin allows you to create user-defined **hotstrings** and **hotkeys**. When a **hotstring** or **hotkey** is activated, it will replace or insert user-defined text. 
 
