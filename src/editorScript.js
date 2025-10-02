@@ -249,7 +249,13 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
                 let { startPos, endPos, replacement } = this.getHotstringReplacement(lineTextUpToCursor);
                 if (startPos !== undefined) {
                     // Make \n and \t be literal newlines and tabs
-                    replacement = replacement.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+                    replacement = replacement
+                        .replace(/\\\\n/g, '__ESCAPED_N__')
+                        .replace(/\\\\t/g, '__ESCAPED_T__')
+                        .replace(/\\n/g, '\n')
+                        .replace(/\\t/g, '\t')
+                        .replace(/__ESCAPED_N__/g, '\\n')
+                        .replace(/__ESCAPED_T__/g, '\\t');
                     // You can't call a new update from within an update, it throws an exception
                     // This function is called from within an update
                     // So, use setTimeout(..., 0) to defer the update until the current stack finishes

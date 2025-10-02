@@ -17,26 +17,28 @@ joplin.plugins.register({
 		});
 		await joplin.settings.registerSettings({
 			startToken: {
-				value: '', // Default start token
-				type: SettingItemType.String,
 				section: 'hotstrings',
 				public: true,
-					label: 'Start Token',
+				type: SettingItemType.String,
+				value: '', // Default start token
+				label: 'Start Token',
 			},
 			endToken: {
-				value: '/', // Default end token
-				type: SettingItemType.String,
 				section: 'hotstrings',
 				public: true,
-					label: 'End Token',
+				type: SettingItemType.String,
+				value: '/', // Default end token
+				label: 'End Token',
 			},
 			configNoteId: {
-				value: '', // ID of the config note for this plugin
-				type: SettingItemType.String,
+
 				section: 'hotstrings',
 				public: true,
-					label: 'Hotstrings definitions note ID',
-					description: `Set the note ID for the note you'd like to use for your hotstring definitions. You can auto-populate this field by opening a note, and setting its first line to just "!!!HOTSTRINGS!!!".`
+				type: SettingItemType.String,
+				value: '', // ID of the config note for this plugin
+				label: 'Hotstrings definitions note ID',
+				description: `Set the note ID for the note you'd like to use for your hotstring definitions. 
+				You can auto-populate this field by opening a note, and setting its first line to just "!!!HOTSTRINGS!!!".`,
 			}
 		});
 		// Register the editor plugin

@@ -2,7 +2,7 @@
 
 This Joplin plugin allows you to create user-defined **hotstrings** and **hotkeys**. When a **hotstring** or **hotkey** is activated, it will replace or insert user-defined text. 
 
-**Version**: 1.0.0
+**Version**: 1.0.1
 
 ### Installation
 
@@ -42,8 +42,8 @@ To define a **hotstring**, open the plugin's claimed config note and, on a new l
 And this will define a **hotstring** which, when activated, changes the text `left` to `←`. 
 
 **Hotstrings** can be either case-insensitive or case-sensitive, depending on the number of colons between the trigger and replacement:
-* Use one colon (:) for case-insensitive **hotstrings**
-* Use two colons (::) for case-sensitive **hotstrings**
+* Use one colon (`:`) for case-insensitive **hotstrings**
+* Use two colons (`::`) for case-sensitive **hotstrings**
 
 Example:
 ```
@@ -76,7 +76,7 @@ For example, you may want to define them both as `::`, or both as `/`, in which 
 
 **Hotkeys** work just like **hotstrings**—except they're triggered by pressing a key combination, rather than by typing a **hotstring**. 
 
-To define a **hotkey**, use three colons (:::) instead of one or two. On the left side, write the key combination desired, using `+` between each key
+To define a **hotkey**, use three colons (`:::`) instead of one or two. On the left side, write the key combination desired, using `+` between each key
 
 Examples:
 ```
@@ -94,7 +94,7 @@ Note: Due to a [bug](https://discourse.joplinapp.org/t/bug-inconsistent-modifier
 ### Limitations
 * **Hotkeys** cannot distinguish between left and right modifier keys. There is no `CTRL_L` or `CTRL_R`—only `CTRL`, etc. 
 * **Hotstring** definitions (left-side triggers) cannot contain newlines.
-	* However, text replacements (right-side outputs) **can** contain newlines and tabs. If you type `\n` or `\t` in your replacement string, it will be rendered as a literal newline or tab character, respectively. 
+	* However, text replacements (right-side outputs) **can** contain newlines and tabs. If you type `\n` or `\t` in your replacement string, it will be rendered as a literal newline or tab character, respectively. You can double-escape them (`\\n` and `\\t`) if you want a literal `\n` or `\t` instead. 
 *  When you add or change **hotkeys**, the plugin must create menu items for them - you may see them appear in the Tools menu. Due to limitations with the Joplin API, commands can't be removed without restarting Joplin - so, since the plugin updates live as you make edits to this document, the Tools menu may fill with extra commands. This is **temporary** and **cosmetic**, and all the extraneous commands and menus will disappear the next time Joplin is restarted.
 *  **Hotstrings** and **hotkeys** only work in the markdown editor - the rich text editor is not supported. 
 
