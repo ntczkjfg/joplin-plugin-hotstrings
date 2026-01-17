@@ -6,20 +6,21 @@ export default (context) => {
     return {
         assets: () => [{ name: 'style.css' }],
         plugin: async (codeMirrorWrapper) => {
-            const [noteId, configNoteId, darkMode, startToken, endToken] = await Promise.all([
+            const [noteId, configNoteId, darkMode, startToken, endToken, altMode] = await Promise.all([
                 context.postMessage({ name: 'getNoteId', data: {} }),
                 context.postMessage({ name: 'getSetting', data: { id: 'configNoteId' } }),
                 context.postMessage({ name: 'getDarkMode', data: {} }),
                 context.postMessage({ name: 'getSetting', data: { id: 'startToken' } }),
-                context.postMessage({ name: 'getSetting', data: { id: 'endToken' } })
+                context.postMessage({ name: 'getSetting', data: { id: 'endToken' } }),
+                context.postMessage({ name: 'getSetting', data: { id: 'altMode' } }),
             ]);
             // Add an update listener: triggers on every document change
-            codeMirrorWrapper.addExtension(configPlugin(context, noteId, configNoteId, darkMode, startToken, endToken));
+            codeMirrorWrapper.addExtension(configPlugin(context, noteId, configNoteId, darkMode, startToken, endToken, altMode));
         },
     };
 };
 
-const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endToken) => ViewPlugin.fromClass(
+const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endToken, altMode) => ViewPlugin.fromClass(
     class {
         constructor(view) {
             try {
@@ -27,6 +28,7 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
                 this.configNoteId = configNoteId; // Tracks ID of plugin's config note
                 this.startToken = startToken;
                 this.endToken = endToken;
+                this.altMode = altMode;
                 this.currentNoteLength = view.state.doc.length; // Helps detect when the note changes
                 this.hotstrings = {};
                 this.HoTsTrInGs = {};
@@ -56,7 +58,9 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
                             update.view.dispatch({ effects: [] });
                         });
                     } else {
-                        this.replaceHotstring(update); // Checks if user typed a hotstring, replaces it if so
+                        // Checks if user typed a hotstring, replaces it if so
+                        if (this.altMode) this.replaceHotstringAlt(update);
+                        else this.replaceHotstring(update);
                         this.updateDecorations(update.view, false); // Adds styles if in the config note
                     }
                 }
@@ -180,6 +184,13 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
                         hotkeys[hotkey] = right;
                     }
                 }
+                // Sort this.HoTsTrInGs and this.hotstrings by key length, largest to smallest
+                this.HoTsTrInGs = Object.fromEntries(
+                    Object.entries(this.HoTsTrInGs).sort((a, b) => b[0].length - a[0].length)
+                );
+                this.hotstrings = Object.fromEntries(
+                    Object.entries(this.hotstrings).sort((a, b) => b[0].length - a[0].length)
+                );
                 if (view) {
                     // view is defined, so we are in the config note and are applying our decorations
                     // index of this match in the document as a whole, from start to finish
@@ -232,6 +243,37 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
             }
         }
 
+        replaceHotstringAlt(update) {
+            let otherWay = false;
+            update.changes.iterChanges((fromA, toA, fromB, toB, inserted) => {
+                const insertedText = inserted.toString();
+                if (!insertedText) return;
+                if (insertedText.length === 1) {
+                    otherWay = true;
+                    return;
+                }
+                let replacements = this.getHotstringReplacementAlt(inserted.toString());
+                const changes = [];
+                for (const replacement of replacements) {
+                    let { from, to, newText } = replacement;
+                    newText = newText
+                        .replace(/\\\\n/g, '__ESCAPED_N__')
+                        .replace(/\\\\t/g, '__ESCAPED_T__')
+                        .replace(/\\n/g, '\n')
+                        .replace(/\\t/g, '\t')
+                        .replace(/__ESCAPED_N__/g, '\\n')
+                        .replace(/__ESCAPED_T__/g, '\\t');
+                    changes.push({
+                        from: fromB + from,
+                        to: fromB + to,
+                        insert: newText,
+                    });
+                }
+                if (changes.length) setTimeout(() => { update.view.dispatch({ changes: changes }) }, 0);
+            });
+            if (otherWay) return this.replaceHotstring(update);
+        }
+
         // Checks if what the user typed completed a valid hotstring, and replaces it if so
         replaceHotstring(update) {
             update.changes.iterChanges((fromA, toA, fromB, toB, inserted) => {
@@ -264,7 +306,7 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
                             changes: {
                                 from: fromB + startPos, // fromB is from the last char of the endToken, so startPos is negative
                                 to: fromB + endPos, // endPos is always 1, because the inserted character is always length 1
-                                insert: replacement
+                                insert: replacement,
                             }
                         });
                     }, 0);
@@ -272,6 +314,26 @@ const configPlugin = (context, noteId, configNoteId, darkMode, startToken, endTo
                     this.currentNoteLength += replacement.length - (endPos - startPos);
                 }
             });
+        }
+
+        getHotstringReplacementAlt(lineTextUpToCursor) {
+            const replacements = [];
+            for (const hotstrings of [this.HoTsTrInGs, this.hotstrings]) {
+                for (const [key, value] of Object.entries(hotstrings)) {
+                    const fullHotstring = this.startToken + key + this.endToken;
+                    while (lineTextUpToCursor.includes(fullHotstring)) {
+                        const replacement = {
+                            from: lineTextUpToCursor.indexOf(fullHotstring),
+                            to: lineTextUpToCursor.indexOf(fullHotstring) + fullHotstring.length,
+                            newText: value,
+                        }
+                        replacements.push(replacement)
+                        const chars = '\uE000'.repeat(fullHotstring.length);
+                        lineTextUpToCursor = lineTextUpToCursor.replace(fullHotstring, chars);
+                    }
+                }
+            }
+            return replacements;
         }
 
         // Finds if lineTextUpToCursor ends in a valid hotstring

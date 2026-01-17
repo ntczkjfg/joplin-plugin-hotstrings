@@ -31,7 +31,6 @@ joplin.plugins.register({
 				label: 'End Token',
 			},
 			configNoteId: {
-
 				section: 'hotstrings',
 				public: true,
 				type: SettingItemType.String,
@@ -39,6 +38,14 @@ joplin.plugins.register({
 				label: 'Hotstrings definitions note ID',
 				description: `Set the note ID for the note you'd like to use for your hotstring definitions. 
 				You can auto-populate this field by opening a note, and setting its first line to just "!!!HOTSTRINGS!!!".`,
+			},
+			altMode: {
+				section: 'hotstrings',
+				public: true,
+				type: SettingItemType.Bool,
+				value: false,
+				label: 'Trigger hotstrings anywhere in input',
+				description: 'If a block of text is sent to a note all at once, the plugin will search it for hotstrings and replace them. Enable this to support voice-to-text or some mobile input methods, but note this will also cause hotstrings to activate within pasted text. ',
 			}
 		});
 		// Register the editor plugin

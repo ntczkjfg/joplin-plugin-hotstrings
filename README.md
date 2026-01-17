@@ -2,7 +2,7 @@
 
 This Joplin plugin allows you to create user-defined **hotstrings** and **hotkeys**. When a **hotstring** or **hotkey** is activated, it will replace or insert user-defined text. 
 
-**Version**: 1.0.1
+**Version**: 1.1.0
 
 ### Installation
 
@@ -148,10 +148,16 @@ A typing test - can the plugin keep up with full typing speed?
 There is a settings page for the plugin in the Joplin options. There, you can:
 * Change the **start token** and **end token**
 * Manually set the note ID of the plugin's config note
+* Change the trigger method for hotstrings - see below. 
 
 ![](screenshots/settings.png)
 
-Note that all of these settings can also be set from the config note itself. 
+Note that all of these settings but the last can also be set from the config note itself. 
+
+## Voice-to-text and some mobile input methods, like swipe-to-text or autocorrect, aren't working!
+By default, this plugin assumes input comes from a keyboard, with keys sent one at a time. This assumption is to ensure hotstrings only ever activated when the user intentionally typed a hotstring - and not, for example, when pasted-in text contained a hotstring. 
+
+However, this assumption breaks with input methods that send multiple characters at once - like with voice-to-text, swipe-to-text, and autocorrect. To address this, an alternate mode was added to the settings page, to trigger hotstrings anywhere in input. When enabled, these input methods should work fine. Just note that, with this mode enabled, hotstrings will ALSO activate in any text that is pasted into the note. 
 
 ## Troubleshooting
 If a **hotkey** isn't working, even though the config note's coloration indicates it was successfully parsed, it may be because the **hotkey** is already in use by Joplin or your operating system. This plugin does not verify if a **hotkey** is actually free to use—only that it's formatted correctly. The plugin will attempt to register the **hotkey** and, if it's already in use by Joplin for something else, it will silently fail.
